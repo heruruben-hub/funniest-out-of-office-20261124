@@ -12,6 +12,9 @@ import sys
 
 OUTPUT_PATH = os.environ.get("ENTRY_OUTPUT", "/output/entry.txt")
 
+# Competition gate: the reply must fit in a single line of 1-140 chars.
+MAX_CHARS = 140
+
 REPLY = (
     "I'm out of office until Monday. My replacement is my dog, who has "
     "already approved your email by eating it."
@@ -24,9 +27,9 @@ def validate(text: str) -> None:
         raise ValueError("reply must not be empty or only whitespace")
     if "\n" in text or "\r" in text:
         raise ValueError("reply must be a single line")
-    if len(text) > 140:
+    if len(text) > MAX_CHARS:
         raise ValueError(
-            f"reply is {len(text)} characters, over the 140 limit"
+            f"reply is {len(text)} characters, over the {MAX_CHARS} limit"
         )
 
 
